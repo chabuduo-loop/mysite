@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    我的网站|首页
+{% endblock %}
+
+{% block header_extends %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+{% endblock %}
+
+{% block nav_home_active %}active{% endblock %}
+
+{% block content %}
+    <h3 class="home-content">欢迎访问sly的Blog</h3>
+    <!-- 图表容器 DOM -->
+    <div class = "open">
+    <div id="container"></div>
+    <div class="background">
+        <div class="hot-data">
+            <h4>今天热门博客</h4>
+            <ul>
+                {% for hot_data in today_hot_data %}
+                    <li><a href="{% url 'blog_detail' hot_data.content_object.pk %}">{{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>            
+                {% empty %}
+                    <li>今天暂时没有热门博客</li>
+                {% endfor %}
+            </ul>
+        
+            <h4>昨天热门博客</h4>
+            <ul>
+                {% for hot_data in yesterday_hot_data %}
+                    <li><a href="{% url 'blog_detail' hot_data.content_object.pk %}">{{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>            
+                {% empty %}
+                    <li>昨天暂时没有热门博客</li>
+                {% endfor %}
+            </ul>
+        
+            <h4>7天热门博客</h4>
+            <ul>
+                {% for hot_blog in hot_blogs_for_7_days %}
+                    <li><a href="{% url 'blog_detail' hot_blog.id %}">{{ hot_blog.title }}</a>({{ hot_blog.read_num_sum }})</li>            
+                {% empty %}
+                    <li>昨天暂时没有热门博客</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    
+    
+    <script>
+        // 图表配置
+        var options = {
+            chart: { type: 'line' },
+            title: { text: null },
+            xAxis: {
+                categories: {{ dates|safe }},   // x 轴分类
+                tickmarkPlacement: 'on',
+                title: { text: '前7日阅读量变化'},
+            },
+            yAxis: {
+                title: { text: null },
+                labels:{ enabled: false },
+                gridLineDashStyle: 'Dash',
+            },
+            series: [{                              // 数据列
+                name: '阅读量',                     // 数据列名
+                data: {{ read_nums }}               // 数据
+                    }],
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: { enabled: false },
+            credits: { enabled: false },
+        };
+        // 图表初始化函数
+        var chart = Highcharts.chart('container', options);
+    </script>
+    </div>
+    <div class="select">
+        <select class ="form-control select select-primary select-block mbl"
+        onchange="self.location.href=options[selectedIndex].value">
+            <optgroup label ="杂谈">
+                <option value ="0">随笔</option>
+                <option value ="1">感悟</option>
+            </optgroup>
+            <optgroup label ="学习路线">
+                <option value ="/blog/type/4">PYTHON基础</option>
+                <option value ="/blog/type/5">SQL基础 </option>
+                <option value ="/blog/type/6">Http协议</option>
+                <option value ="/blog/type/7">算法图解</option>
+            </optgroup>
+        </select>                       
+    </div>
+    
+    
+            
+    
+{% endblock %}

@@ -1,0 +1,37 @@
+h3.home-content {
+    font-size: 166%;
+    text-align: center;
+    margin-top: 0em;
+    margin-bottom: 2em;
+
+}
+
+div#container {
+    
+    margin: 0 auto;
+    height: 20em ;
+    min-width: 20em;
+    max-width: 30em;
+
+}
+
+div.hot-data {
+    position: fixed;
+    top: 70px;
+    right: 100px;
+    background-color:rgba(187,255,255,0.3);
+
+    
+    
+}
+
+div.select {
+     position: fixed;
+     top: 70px;
+     left: 10px;
+    
+}
+div.open {
+    height: 1000px;
+
+}

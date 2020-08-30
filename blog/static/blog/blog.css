@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin-top: 0px!important;
+}
+ul.blog-types {
+	list-style-type: none;
+}
+div.blog:not(:last-child){
+	margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+}
+div.blog h4 {
+	letter-spacing:  15px;
+	margin-top:0.5em;
+}
+div.blog p.blog-info{
+	margin-bottom: 2;
+	
+}
+div.blog.more{
+	margin-top:1em;
+}
+div.open {
+    height: 1000px;
+
+}

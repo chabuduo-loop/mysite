@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'dist/css/flat-ui.css' %}" >
+    <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+    
+    {% block header_extends %}{% endblock %}
+</head>
+<body>
+    <nav class ="navbar navbar-inverse navbar-embossed navbar-expand-lg" role="navigation">
+        <a class="navbar-brand" href= "{% url 'home' %}">sly的Blog</a>
+        <div class ="  collapse navbar-collapse"  id ="  navbar-collapse-01" >
+            <ul class ="  nav navbar-nav mr-auto" >
+                <li> 
+                    <li class="{% block nav_home_active %}{% endblock %}">
+                        <a href= "{% url 'home' %}">首页</a> </li>
+                <li>
+                <li class="{% block nav_blog_active %}{% endblock %}">
+                 <a href = "{% url 'blog_list' %}">博客</a> </li>
+            </ul>
+        </div> </navbar-collapse-01>
+    </nav> </navbar>
+    {% block content %}{% endblock %}
+</body>
+</html>
